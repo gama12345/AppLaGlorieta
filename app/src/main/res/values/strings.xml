@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">EstacionamientoLaGlorieta</string>
+    <string name="content_description">Content description</string>
+    <!--InicioSesion-->
+    <string name="nombre">Estacionamiento "La Glorieta"</string>
+    <string name="email">Correo electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="remember_password"><u>Recordar contraseña</u></string>
+    <string name="btn_login">Entrar</string>
+    <string name="register"><u>¿Aún no tienes cuenta? ¡Registrate ya!</u></string>
+    <string name="cuenta">Cuenta</string>
+    <string name="registros">Registros</string>
+    <string name="reservar">Reservar</string>
+    <string name="cerrar_sesion">Cerrar sesión</string>
+    <!--RegistrarCliente-->
+    <string name="titulo_registro">Registro</string>
+    <string name="registro_instrucciones">Completa el formulario y haz click en "Registrar".</string>
+    <string name="registro_nombre">Nombre</string>
+    <string name="registro_apellidos">Apellidos</string>
+    <string name="registro_telefono">Teléfono</string>
+    <string name="registro_calle">Calle</string>
+    <string name="registro_colonia">Colonia</string>
+    <string name="registro_codigo_postal">Código postal</string>
+    <string name="registro_localidad">Localidad</string>
+    <string name="registro_confirmar_contraseña">Confirmar contraseña</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="registrar">Registrar</string>
+    <string name="regresar">Regresar</string>
+    <!--Recuperar contraseña-->
+    <string name="titulo_recuperaContra">Recuperación de contraseña</string>
+    <string name="recuperaContra_instrucciones">Escribe el correo electrónico asociado a la cuenta.</string>
+    <string name="recuperaContra_btnEnviar">Enviar</string>
+    <!--Cuenta de usuario-->
+    <string name="cuenta_titulo">Mi cuenta</string>
+    <string name="btn_guardar_cambios">Guardar cambios</string>
+    <!--Registros resguardos-->
+    <string name="titulo_filtrar">Filtrar por:</string>
+
+    <string-array name="estatus_resguardos">
+        <item>Todos</item>
+        <item>Activo</item>
+        <item>Pagado</item>
+    </string-array>
+    <string-array name="tamanios">
+        <item>Chico</item>
+        <item>Grande</item>
+    </string-array>
+</resources>

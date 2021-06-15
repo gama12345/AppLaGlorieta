@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tV_registrar_vehiculo_titulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:text="Datos del vehiculo"
+                android:textColor="@color/dark_primary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imgView_registrar_vehiculo_logo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/content_description"
+                android:maxHeight="120dp"
+                android:scaleType="fitCenter"
+                app:tint="@color/dark_primary"
+                app:srcCompat="@drawable/ic_vehiculo" />
+
+            <EditText
+                android:id="@+id/et_registrar_vehiculo_placas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="Placas"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/et_registrar_vehiculo_marca"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="Marca"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/et_registrar_vehiculo_modelo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="Modelo"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/et_registrar_vehiculo_color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="Color"
+                android:inputType="textPersonName" />
+
+            <Spinner
+                android:id="@+id/spinner_registrar_vehiculo_tamanio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp" />
+
+            <Button
+                android:id="@+id/btn_registrar_vehiculo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:background="#147721"
+                android:text="@string/registrar"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

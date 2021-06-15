@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "37385350280",
+    "project_id": "estacionamiento-la-glorieta",
+    "storage_bucket": "estacionamiento-la-glorieta.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:37385350280:android:237d9a802a8afec6c1c33d",
+        "android_client_info": {
+          "package_name": "com.example.estacionamientolaglorieta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "37385350280-voo3900835pctv26hfrk7929chipe2g8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoDNMkSS73TlqzwihaNS_d9k2AlgN2sug"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "37385350280-voo3900835pctv26hfrk7929chipe2g8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

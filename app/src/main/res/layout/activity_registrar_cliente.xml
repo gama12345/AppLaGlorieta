@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegistrarCliente">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tV_registro_titulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="@string/titulo_registro"
+                android:textColor="@color/primary_text"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tV_registro_instrucciones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:text="@string/registro_instrucciones"
+                android:textColor="@color/secondary_text"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/et_registro_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/registro_nombre"
+                android:inputType="textPersonName"
+                android:textColor="@color/primary_text" />
+
+            <EditText
+                android:id="@+id/et_registro_apellidos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/registro_apellidos"
+                android:inputType="textPersonName"
+                android:textColor="@color/primary_text" />
+
+            <EditText
+                android:id="@+id/et_registro_telefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/registro_telefono"
+                android:inputType="phone"
+                android:textColor="@color/primary_text" />
+
+            <EditText
+                android:id="@+id/et_registro_calle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/registro_calle"
+                android:inputType="text"
+                android:textColor="@color/primary_text" />
+
+            <EditText
+                android:id="@+id/et_registro_colonia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/registro_colonia"
+                android:inputType="text"
+                android:textColor="@color/primary_text" />
+
+            <EditText
+                android:id="@+id/et_registro_codigo_postal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/registro_codigo_postal"
+                android:inputType="number"
+                android:textColor="@color/primary_text" />
+
+            <EditText
+                android:id="@+id/et_registro_localidad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/registro_localidad"
+                android:inputType="text"
+                android:textColor="@color/primary_text" />
+
+            <EditText
+                android:id="@+id/et_registro_correo_electronico"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/primary_text" />
+
+            <EditText
+                android:id="@+id/et_registro_contraseña"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:textColor="@color/primary_text" />
+
+            <EditText
+                android:id="@+id/et_registro_confirmar_contraseña"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/registro_confirmar_contraseña"
+                android:inputType="textPassword"
+                android:textColor="@color/primary_text" />
+
+            <Button
+                android:id="@+id/btn_registro_cancelar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="#BF2020"
+                android:text="@string/regresar"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_registro_registrar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="#147721"
+                android:text="@string/registrar"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
