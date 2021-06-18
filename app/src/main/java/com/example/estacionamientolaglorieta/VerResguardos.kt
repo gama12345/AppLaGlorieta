@@ -58,6 +58,15 @@ class VerResguardos : Fragment() {
         progressBar = view_fragement.findViewById(R.id.progressBar_resguardos)
         linear_progress = view_fragement.findViewById(R.id.linear_reguardos_progress)
         activarEfectoProgressBar()
+        escucharCambios()
+    }
+
+    private fun escucharCambios(){
+        db.collection("resguardos").addSnapshotListener{snapshot, e ->
+            if(snapshot != null && !snapshot.isEmpty){
+                cargarRegistrosResguardos()
+            }
+        }
     }
 
     var filtrarResguardos: OnItemSelectedListener = object : OnItemSelectedListener {
