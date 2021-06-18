@@ -6,10 +6,8 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
+import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
-import android.widget.ArrayAdapter
-import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,6 +25,9 @@ class VerResguardos : Fragment() {
     private lateinit var refreshLayout: SwipeRefreshLayout
     private lateinit var view_fragement: View
     private lateinit var db: FirebaseFirestore
+    lateinit var progressBar: ProgressBar
+    lateinit var linear_progress: LinearLayout
+    var terminar_progressBar = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         view_fragement = inflater.inflate(R.layout.fragment_resguardos, container, false)
@@ -54,6 +55,9 @@ class VerResguardos : Fragment() {
         recyclerView.layoutManager = lim
         refreshLayout = view_fragement.findViewById(R.id.refresh_resguardos)
         refreshLayout.setOnRefreshListener(recargar)
+        progressBar = view_fragement.findViewById(R.id.progressBar_resguardos)
+        linear_progress = view_fragement.findViewById(R.id.linear_reguardos_progress)
+        activarEfectoProgressBar()
     }
 
     var filtrarResguardos: OnItemSelectedListener = object : OnItemSelectedListener {
@@ -103,15 +107,19 @@ class VerResguardos : Fragment() {
                                     }
                                     val adaptador = AdaptadorRegistrosResguardos(registros)
                                     recyclerView.adapter = adaptador
+                                    detenerEfectoProgressBar()
                                 }
                                 .addOnFailureListener{ error ->
+                                    detenerEfectoProgressBar()
                                     Snackbar.make(spinner, error.toString(), Snackbar.LENGTH_SHORT).show()
                                 }
                     }else{
+                        detenerEfectoProgressBar()
                         Snackbar.make(spinner, "No se encontraron registros de resguardos", Snackbar.LENGTH_SHORT).show()
                     }
                 }
                 .addOnFailureListener{ error ->
+                    detenerEfectoProgressBar()
                     Snackbar.make(spinner, error.toString(), Snackbar.LENGTH_SHORT).show()
                 }
     }
@@ -152,20 +160,40 @@ class VerResguardos : Fragment() {
                                     }
                                     val adaptador = AdaptadorRegistrosResguardos(registros)
                                     recyclerView.adapter = adaptador
+                                    detenerEfectoProgressBar()
                                 }
                                 .addOnFailureListener{ error ->
+                                    detenerEfectoProgressBar()
                                     Snackbar.make(spinner, error.toString(), Snackbar.LENGTH_SHORT).show()
                                 }
                     }else{
+                        detenerEfectoProgressBar()
                         Snackbar.make(spinner, "No se encontraron registros de resguardos", Snackbar.LENGTH_SHORT).show()
                     }
                 }
                 .addOnFailureListener{ error ->
+                    detenerEfectoProgressBar()
                     Snackbar.make(spinner, error.toString(), Snackbar.LENGTH_SHORT).show()
                 }
     }
+
+    fun activarEfectoProgressBar(){
+        terminar_progressBar = true;
+        Thread(Runnable {
+            while(!terminar_progressBar){
+                progressBar.progress += 5
+                Thread.sleep(50)
+            }
+        }).start()
+    }
+
+    fun detenerEfectoProgressBar(){
+        terminar_progressBar = true
+        linear_progress.visibility = View.GONE
+    }
     
     var recargar = OnRefreshListener {
+        activarEfectoProgressBar()
         cargarRegistrosResguardos()
         refreshLayout.isRefreshing = false
     }

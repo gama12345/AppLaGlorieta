@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EstacionamientoLaGlorieta</string>
+    <string name="app_name">LaGlorieta</string>
     <string name="content_description">Content description</string>
     <!--InicioSesion-->
     <string name="nombre">Estacionamiento "La Glorieta"</string>

@@ -2,8 +2,11 @@ package com.example.estacionamientolaglorieta
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
@@ -20,6 +23,9 @@ class CuentaUsuario : AppCompatActivity() {
     private lateinit var et_correo: EditText
     private lateinit var et_contrasenia: EditText
     private lateinit var btn_guardar_cambios: Button
+    lateinit var progressBar: ProgressBar
+    lateinit var linear_progress: LinearLayout
+    var terminar_progressBar = false
     private lateinit var db: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +57,9 @@ class CuentaUsuario : AppCompatActivity() {
         et_contrasenia = findViewById(R.id.et_cuenta_contraseña)
         btn_guardar_cambios = findViewById(R.id.btn_cuenta_guardar)
         btn_guardar_cambios.setOnClickListener { guardarCambios() }
+        progressBar = findViewById(R.id.progressBar_registrar_vehiculo)
+        linear_progress = findViewById(R.id.linear_registrar_vehiculo_progress)
+        activarEfectoProgressBar()
     }
 
     private fun cargarInformacion(){
@@ -78,9 +87,11 @@ class CuentaUsuario : AppCompatActivity() {
                             Snackbar.LENGTH_SHORT
                         ).show()
                     }
+                    detenerEfectoProgressBar()
                 }
                 .addOnFailureListener{ error ->
                     Snackbar.make(btn_guardar_cambios, error.toString(), Snackbar.LENGTH_SHORT).show()
+                    detenerEfectoProgressBar()
                 }
     }
 
@@ -105,6 +116,7 @@ class CuentaUsuario : AppCompatActivity() {
                 correo,
                 contrasenia
             )){
+                activarEfectoProgressBar()
             val datosActualizados = hashMapOf<String, Any>(
                 "apellidos" to apellidos,
                 "calle" to calle,
@@ -121,14 +133,17 @@ class CuentaUsuario : AppCompatActivity() {
             AppPreferences.contraseñaActual = contrasenia
             db.collection("usuarios").document(AppPreferences.claveUsuario).update(datosActualizados)
                     .addOnSuccessListener { resultado ->
+                        detenerEfectoProgressBar()
                         Snackbar.make(
                             btn_guardar_cambios,
                             "Datos actualizados",
                             Snackbar.LENGTH_SHORT
                         ).show()
+                        detenerEfectoProgressBar()
                     }
                     .addOnFailureListener{ error ->
                         Snackbar.make(btn_guardar_cambios, error.toString(), Snackbar.LENGTH_SHORT).show()
+                        detenerEfectoProgressBar()
                     }
         }
     }
@@ -180,6 +195,21 @@ class CuentaUsuario : AppCompatActivity() {
             Snackbar.LENGTH_SHORT
         ).show() }
         return false
+    }
+
+    fun activarEfectoProgressBar(){
+        terminar_progressBar = true;
+        Thread(Runnable {
+            while(!terminar_progressBar){
+                progressBar.progress += 5
+                Thread.sleep(50)
+            }
+        }).start()
+    }
+
+    fun detenerEfectoProgressBar(){
+        terminar_progressBar = true
+        linear_progress.visibility = View.GONE
     }
 
     //Validaciones

@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.Spinner
+import android.widget.*
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
@@ -18,6 +16,9 @@ class RegistrarReservacion : Fragment() {
     private lateinit var spinner_vehiculo: Spinner
     private lateinit var spinner_cajon: Spinner
     private lateinit var btn_reservar: Button
+    lateinit var progressBar: ProgressBar
+    lateinit var linear_progress: LinearLayout
+    var terminar_progressBar = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         view_fragement = inflater.inflate(R.layout.fragment_registrar_reservacion, container, false)
@@ -36,6 +37,9 @@ class RegistrarReservacion : Fragment() {
         spinner_cajon = view_fragement.findViewById(R.id.spinner_registrar_reservacion_cajon)
         btn_reservar = view_fragement.findViewById(R.id.btn_registrar_reservacion_guardar)
         btn_reservar.setOnClickListener { reservar() }
+        progressBar = view_fragement.findViewById(R.id.progressBar_registrar_reservacion)
+        linear_progress = view_fragement.findViewById(R.id.linear_registrar_reservacion_progress)
+        activarEfectoProgressBar()
     }
 
     private fun cargarDatos(){
@@ -87,37 +91,45 @@ class RegistrarReservacion : Fragment() {
                                                                     adaptador_cajones.add("Cajón: "+cajon.get("numero").toString())
                                                                 }
                                                                 adaptador_cajones.notifyDataSetChanged()
+                                                                detenerEfectoProgressBar()
                                                                 if(adaptador_vehiculos.count == 0) {
                                                                     btn_reservar.visibility = View.GONE
                                                                     Snackbar.make(btn_reservar, "Todos sus vehiculos están en resguardo/reservación", Snackbar.LENGTH_SHORT).show()
                                                                 }
                                                             }else{
+                                                                detenerEfectoProgressBar()
                                                                 btn_reservar.visibility = View.GONE
                                                                 Snackbar.make(btn_reservar, "Sin disponibilidad. Estacionamiento lleno", Snackbar.LENGTH_SHORT).show()
                                                             }
                                                         }
                                                         .addOnFailureListener{ error ->
+                                                            detenerEfectoProgressBar()
                                                             Snackbar.make(btn_reservar, error.toString(), Snackbar.LENGTH_SHORT).show()
                                                         }
                                             }
                                             .addOnFailureListener{ error ->
+                                                detenerEfectoProgressBar()
                                                 Snackbar.make(btn_reservar, error.toString(), Snackbar.LENGTH_SHORT).show()
                                             }
                                 }
                                 .addOnFailureListener{ error ->
+                                    detenerEfectoProgressBar()
                                     Snackbar.make(btn_reservar, error.toString(), Snackbar.LENGTH_SHORT).show()
                                 }
                     }else{
+                        detenerEfectoProgressBar()
                         btn_reservar.visibility = View.GONE
                         Snackbar.make(btn_reservar, "Sin vehiculos registrados", Snackbar.LENGTH_SHORT).show()
                     }
                 }
                 .addOnFailureListener{ error ->
+                    detenerEfectoProgressBar()
                     Snackbar.make(btn_reservar, error.toString(), Snackbar.LENGTH_SHORT).show()
                 }
     }
 
     private fun reservar(){
+        activarEfectoProgressBar()
         var elementos = spinner_vehiculo.selectedItem.toString().split(", ")
         var placas = elementos[2]
         elementos = spinner_cajon.selectedItem.toString().split(": ")
@@ -140,39 +152,63 @@ class RegistrarReservacion : Fragment() {
                                                                 .addOnSuccessListener { resultado ->
                                                                     db.collection("cajones").document("cajon"+numero_cajon).update("estatus", "Reservado")
                                                                             .addOnSuccessListener { resultado ->
+                                                                                detenerEfectoProgressBar()
                                                                                 Snackbar.make(btn_reservar, "Reservación registrada correctamente", Snackbar.LENGTH_SHORT).show()
                                                                                 cargarDatos()
                                                                             }
                                                                             .addOnFailureListener{ error ->
+                                                                                detenerEfectoProgressBar()
                                                                                 Snackbar.make(btn_reservar, error.toString(), Snackbar.LENGTH_SHORT).show()
                                                                             }
                                                                 }
                                                                 .addOnFailureListener{ error ->
+                                                                    detenerEfectoProgressBar()
                                                                     Snackbar.make(btn_reservar, error.toString(), Snackbar.LENGTH_SHORT).show()
                                                                 }
                                                     }else{
+                                                        detenerEfectoProgressBar()
                                                         Snackbar.make(btn_reservar, "El vehiculo ya se encuantra en resguardo", Snackbar.LENGTH_SHORT).show()
                                                         cargarDatos()
                                                     }
                                                 }
                                                 .addOnFailureListener{ error ->
+                                                    detenerEfectoProgressBar()
                                                     Snackbar.make(btn_reservar, error.toString(), Snackbar.LENGTH_SHORT).show()
                                                 }
                                     }else{
+                                        detenerEfectoProgressBar()
                                         Snackbar.make(btn_reservar, "El vehiculo ya cuenta con una reservación activa", Snackbar.LENGTH_SHORT).show()
                                         cargarDatos()
                                     }
                                 }
                                 .addOnFailureListener{ error ->
+                                    detenerEfectoProgressBar()
                                     Snackbar.make(btn_reservar, error.toString(), Snackbar.LENGTH_SHORT).show()
                                 }
                     }else{
+                        detenerEfectoProgressBar()
                         Snackbar.make(btn_reservar, "Cajón no disponible. Seleccione uno diferente", Snackbar.LENGTH_SHORT).show()
                         cargarDatos()
                     }
                 }
                 .addOnFailureListener{ error ->
+                    detenerEfectoProgressBar()
                     Snackbar.make(btn_reservar, error.toString(), Snackbar.LENGTH_SHORT).show()
                 }
+    }
+
+    fun activarEfectoProgressBar(){
+        terminar_progressBar = true;
+        Thread(Runnable {
+            while(!terminar_progressBar){
+                progressBar.progress += 5
+                Thread.sleep(50)
+            }
+        }).start()
+    }
+
+    fun detenerEfectoProgressBar(){
+        terminar_progressBar = true
+        linear_progress.visibility = View.GONE
     }
 }

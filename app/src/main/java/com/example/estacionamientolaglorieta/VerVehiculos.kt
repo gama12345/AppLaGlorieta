@@ -5,10 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.ProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.estacionamientolaglorieta.adaptadores.AdaptadorRegistrosReservaciones
 import com.example.estacionamientolaglorieta.adaptadores.AdaptadorRegistrosVehiculos
 import com.example.estacionamientolaglorieta.adaptadores.Vehiculo
 import com.google.android.material.snackbar.Snackbar
@@ -19,6 +20,9 @@ class VerVehiculos : Fragment() {
     private lateinit var refreshLayout: SwipeRefreshLayout
     private lateinit var view_fragement: View
     private lateinit var db: FirebaseFirestore
+    lateinit var progressBar: ProgressBar
+    lateinit var linear_progress: LinearLayout
+    var terminar_progressBar = false
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +46,9 @@ class VerVehiculos : Fragment() {
         recyclerView.layoutManager = lim
         refreshLayout = view_fragement.findViewById(R.id.refresh_registros_vehiculos)
         refreshLayout.setOnRefreshListener(recargar)
+        progressBar = view_fragement.findViewById(R.id.progressBar_registrar_vehiculo)
+        linear_progress = view_fragement.findViewById(R.id.linear_registrar_vehiculo_progress)
+        activarEfectoProgressBar()
     }
 
     private fun cargarVehiculos(){
@@ -59,6 +66,7 @@ class VerVehiculos : Fragment() {
                     }
                     val adaptador = AdaptadorRegistrosVehiculos(lista)
                     recyclerView.adapter = adaptador
+                    detenerEfectoProgressBar()
                 }else{
                     Snackbar.make(recyclerView, "Aún no tiene vehiculos registrados", Snackbar.LENGTH_SHORT).show()
                 }
@@ -66,6 +74,21 @@ class VerVehiculos : Fragment() {
             .addOnFailureListener{ error ->
                 Snackbar.make(recyclerView, error.toString(), Snackbar.LENGTH_SHORT).show()
             }
+    }
+
+    fun activarEfectoProgressBar(){
+        terminar_progressBar = true;
+        Thread(Runnable {
+            while(!terminar_progressBar){
+                progressBar.progress += 5
+                Thread.sleep(50)
+            }
+        }).start()
+    }
+
+    fun detenerEfectoProgressBar(){
+        terminar_progressBar = true
+        linear_progress.visibility = View.GONE
     }
 
     var recargar = SwipeRefreshLayout.OnRefreshListener {

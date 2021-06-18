@@ -5,10 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Spinner
+import android.widget.*
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.regex.Pattern
@@ -22,6 +19,9 @@ class RegistrarVehiculo : Fragment() {
     private lateinit var btn_registrar: Button
     private lateinit var view_fragement: View
     private lateinit var db: FirebaseFirestore
+    lateinit var progressBar: ProgressBar
+    lateinit var linear_progress: LinearLayout
+    var terminar_progressBar = false
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -48,9 +48,13 @@ class RegistrarVehiculo : Fragment() {
         var adaptador = ArrayAdapter.createFromResource(requireContext(), R.array.tamanios, android.R.layout.simple_spinner_item)
         adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner_tamanio.adapter = adaptador
+        progressBar = view_fragement.findViewById(R.id.progressBar_registrar_vehiculo)
+        linear_progress = view_fragement.findViewById(R.id.linear_registrar_vehiculo_progress)
+        detenerEfectoProgressBar()
     }
 
     private fun iniciarRegistro(){
+        activarEfectoProgressBar()
         val placas = et_placas.text.toString()
         val marca = et_marca.text.toString()
         val modelo = et_modelo.text.toString()
@@ -70,16 +74,20 @@ class RegistrarVehiculo : Fragment() {
                             db.collection("vehiculos").document(placas).set(vehiculo)
                                     .addOnSuccessListener {
                                         limpiarCampos()
+                                        detenerEfectoProgressBar()
                                         Snackbar.make(btn_registrar, "Se ha registrado su nuevo vehiculo", Snackbar.LENGTH_SHORT).show()
                                     }
                                     .addOnFailureListener{ error ->
+                                        detenerEfectoProgressBar()
                                         Snackbar.make(btn_registrar, error.toString(), Snackbar.LENGTH_SHORT).show()
                                     }
                         }else{
+                            detenerEfectoProgressBar()
                             Snackbar.make(btn_registrar, "Error - Vehiculo con placas: $placas ya registrado", Snackbar.LENGTH_SHORT).show()
                         }
                     }
                     .addOnFailureListener{ error ->
+                        detenerEfectoProgressBar()
                         Snackbar.make(btn_registrar, error.toString(), Snackbar.LENGTH_SHORT).show()
                     }
         }
@@ -108,6 +116,21 @@ class RegistrarVehiculo : Fragment() {
             Snackbar.make(btn_registrar, "Error - Uno o más campos estan vacíos", Snackbar.LENGTH_LONG).show()
         }
         return false
+    }
+
+    fun activarEfectoProgressBar(){
+        terminar_progressBar = true;
+        Thread(Runnable {
+            while(!terminar_progressBar){
+                progressBar.progress += 5
+                Thread.sleep(50)
+            }
+        }).start()
+    }
+
+    fun detenerEfectoProgressBar(){
+        terminar_progressBar = true
+        linear_progress.visibility = View.GONE
     }
 
     //Validaciones

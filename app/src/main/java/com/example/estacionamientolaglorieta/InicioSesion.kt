@@ -4,7 +4,6 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.StrictMode
-import android.text.method.LinkMovementMethod
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
@@ -51,8 +50,8 @@ class InicioSesion : AppCompatActivity() {
 
     private fun instanciarComponentes(){
         imgView_logo = findViewById(R.id.imgView_logo)
-        progressBar = findViewById(R.id.progressBar_login)
-        linear_progress = findViewById(R.id.linear_login_progress)
+        progressBar = findViewById(R.id.progressBar_registrar_vehiculo)
+        linear_progress = findViewById(R.id.linear_registrar_vehiculo_progress)
         et_email = findViewById(R.id.et_login_email)
         et_contraseña = findViewById(R.id.et_login_password)
         text_recuperar_contrasenia = findViewById(R.id.tV_login_remember_password)

@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +21,9 @@ class VerReservaciones : Fragment() {
     private lateinit var refreshLayout: SwipeRefreshLayout
     private lateinit var db: FirebaseFirestore
     private lateinit var view_fragement: View
+    lateinit var progressBar: ProgressBar
+    lateinit var linear_progress: LinearLayout
+    var terminar_progressBar = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         view_fragement = inflater.inflate(R.layout.fragment_reservaciones_registradas, container, false)
@@ -39,6 +44,9 @@ class VerReservaciones : Fragment() {
         recyclerView.layoutManager = lim
         refreshLayout = view_fragement.findViewById(R.id.refresh_registros_reservaciones)
         refreshLayout.setOnRefreshListener(recargar)
+        progressBar = view_fragement.findViewById(R.id.progressBar_reservaciones)
+        linear_progress = view_fragement.findViewById(R.id.linear_reservaciones_progress)
+        activarEfectoProgressBar()
     }
 
     private fun cargarRegistrosReservaciones(){
@@ -66,17 +74,36 @@ class VerReservaciones : Fragment() {
                                 }
                                 val adaptador = AdaptadorRegistrosReservaciones(lista)
                                 recyclerView.adapter = adaptador
+                                detenerEfectoProgressBar()
                             }
                             .addOnFailureListener{ error ->
+                                detenerEfectoProgressBar()
                                 Snackbar.make(recyclerView, error.toString(), Snackbar.LENGTH_SHORT).show()
                             }
                 }
                 .addOnFailureListener{ error ->
+                    detenerEfectoProgressBar()
                     Snackbar.make(recyclerView, error.toString(), Snackbar.LENGTH_SHORT).show()
                 }
     }
 
+    fun activarEfectoProgressBar(){
+        terminar_progressBar = true;
+        Thread(Runnable {
+            while(!terminar_progressBar){
+                progressBar.progress += 5
+                Thread.sleep(50)
+            }
+        }).start()
+    }
+
+    fun detenerEfectoProgressBar(){
+        terminar_progressBar = true
+        linear_progress.visibility = View.GONE
+    }
+
     var recargar = SwipeRefreshLayout.OnRefreshListener {
+        activarEfectoProgressBar()
         cargarRegistrosReservaciones()
         refreshLayout.isRefreshing = false
     }
