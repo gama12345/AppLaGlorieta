@@ -4,7 +4,6 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.StrictMode
-import android.text.method.LinkMovementMethod
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
@@ -26,7 +25,7 @@ import javax.mail.internet.MimeMessage
 class InicioSesion : AppCompatActivity() {
     val db = Firebase.firestore
     val storage = FirebaseStorage.getInstance()
-    lateinit var imgView_logo: ImageView
+    lateinit var imgV_logo: ImageView
     lateinit var text_recuperar_contrasenia: TextView
     lateinit var text_registro: TextView
     lateinit var btn_enviar_contrasenia: Button
@@ -50,7 +49,7 @@ class InicioSesion : AppCompatActivity() {
     }
 
     private fun instanciarComponentes(){
-        imgView_logo = findViewById(R.id.imgView_logo)
+        imgV_logo = findViewById(R.id.imgView_logo)
         progressBar = findViewById(R.id.progressBar_login)
         linear_progress = findViewById(R.id.linear_login_progress)
         et_email = findViewById(R.id.et_login_email)
@@ -79,7 +78,7 @@ class InicioSesion : AppCompatActivity() {
                     storageReference.getFile(localFile)
                         .addOnSuccessListener { resultado ->
                             val bitMap = BitmapFactory.decodeFile(localFile.absolutePath)
-                            imgView_logo.setImageBitmap(bitMap)
+                            imgV_logo.setImageBitmap(bitMap)
                             terminar_progressBar = true
                             linear_progress.visibility = View.GONE
                         }
