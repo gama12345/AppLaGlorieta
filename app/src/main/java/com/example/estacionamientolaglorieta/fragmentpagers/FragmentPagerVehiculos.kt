@@ -1,4 +1,4 @@
-package com.example.estacionamientolaglorieta.adaptadores
+package com.example.estacionamientolaglorieta.fragmentpagers
 
 import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment

@@ -1,4 +1,4 @@
-package com.example.estacionamientolaglorieta.adaptadores
+package com.example.estacionamientolaglorieta.pojos
 
 class Resguardo constructor(fechas: String, estatus: String, vehiculo: String, servicios: String, cobro: String){
 

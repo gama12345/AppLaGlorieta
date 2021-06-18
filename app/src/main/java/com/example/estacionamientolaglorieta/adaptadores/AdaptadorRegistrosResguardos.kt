@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.estacionamientolaglorieta.R
+import com.example.estacionamientolaglorieta.pojos.Resguardo
 import kotlin.collections.ArrayList
 
 class AdaptadorRegistrosResguardos constructor(private var resguardos: ArrayList<Resguardo>) : RecyclerView.Adapter<AdaptadorRegistrosResguardos.AdaptadorViewHolder>(){
