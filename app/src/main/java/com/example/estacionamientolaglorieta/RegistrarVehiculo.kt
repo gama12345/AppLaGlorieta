@@ -48,8 +48,8 @@ class RegistrarVehiculo : Fragment() {
         var adaptador = ArrayAdapter.createFromResource(requireContext(), R.array.tamanios, android.R.layout.simple_spinner_item)
         adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner_tamanio.adapter = adaptador
-        progressBar = view_fragement.findViewById(R.id.progressBar_registrar_vehiculo)
-        linear_progress = view_fragement.findViewById(R.id.linear_registrar_vehiculo_progress)
+        progressBar = view_fragement.findViewById(R.id.progressBar_login)
+        linear_progress = view_fragement.findViewById(R.id.linear_login_progress)
         detenerEfectoProgressBar()
     }
 

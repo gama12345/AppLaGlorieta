@@ -46,8 +46,8 @@ class VerVehiculos : Fragment() {
         recyclerView.layoutManager = lim
         refreshLayout = view_fragement.findViewById(R.id.refresh_registros_vehiculos)
         refreshLayout.setOnRefreshListener(recargar)
-        progressBar = view_fragement.findViewById(R.id.progressBar_registrar_vehiculo)
-        linear_progress = view_fragement.findViewById(R.id.linear_registrar_vehiculo_progress)
+        progressBar = view_fragement.findViewById(R.id.progressBar_login)
+        linear_progress = view_fragement.findViewById(R.id.linear_login_progress)
         activarEfectoProgressBar()
     }
 

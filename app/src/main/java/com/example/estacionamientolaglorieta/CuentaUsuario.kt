@@ -57,8 +57,8 @@ class CuentaUsuario : AppCompatActivity() {
         et_contrasenia = findViewById(R.id.et_cuenta_contraseña)
         btn_guardar_cambios = findViewById(R.id.btn_cuenta_guardar)
         btn_guardar_cambios.setOnClickListener { guardarCambios() }
-        progressBar = findViewById(R.id.progressBar_registrar_vehiculo)
-        linear_progress = findViewById(R.id.linear_registrar_vehiculo_progress)
+        progressBar = findViewById(R.id.progressBar_login)
+        linear_progress = findViewById(R.id.linear_login_progress)
         activarEfectoProgressBar()
     }
 
