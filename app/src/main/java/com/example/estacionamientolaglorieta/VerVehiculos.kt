@@ -13,6 +13,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.estacionamientolaglorieta.adaptadores.AdaptadorRegistrosVehiculos
 import com.example.estacionamientolaglorieta.pojos.Vehiculo
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 
 class VerVehiculos : Fragment() {
@@ -49,7 +50,17 @@ class VerVehiculos : Fragment() {
         progressBar = view_fragement.findViewById(R.id.progressBar_login)
         linear_progress = view_fragement.findViewById(R.id.linear_login_progress)
         activarEfectoProgressBar()
+        escucharCambios()
     }
+
+    private fun escucharCambios(){
+        db.collection("vehiculos").addSnapshotListener{snapshot, e ->
+            if(snapshot != null && !snapshot.isEmpty){
+                cargarVehiculos()
+            }
+        }
+    }
+
 
     private fun cargarVehiculos(){
         var lista = arrayListOf<Vehiculo>()
@@ -71,7 +82,7 @@ class VerVehiculos : Fragment() {
                     Snackbar.make(recyclerView, "Aún no tiene vehiculos registrados", Snackbar.LENGTH_SHORT).show()
                 }
             }
-            .addOnFailureListener{ error ->
+            .addOnFailureListener { error ->
                 Snackbar.make(recyclerView, error.toString(), Snackbar.LENGTH_SHORT).show()
             }
     }
