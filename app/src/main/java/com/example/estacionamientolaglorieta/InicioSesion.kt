@@ -25,7 +25,7 @@ import javax.mail.internet.MimeMessage
 class InicioSesion : AppCompatActivity() {
     val db = Firebase.firestore
     val storage = FirebaseStorage.getInstance()
-    lateinit var imgView_logo: ImageView
+    lateinit var imgV_logo: ImageView
     lateinit var text_recuperar_contrasenia: TextView
     lateinit var text_registro: TextView
     lateinit var btn_enviar_contrasenia: Button
@@ -49,9 +49,9 @@ class InicioSesion : AppCompatActivity() {
     }
 
     private fun instanciarComponentes(){
-        imgView_logo = findViewById(R.id.imgView_logo)
-        progressBar = findViewById(R.id.progressBar_registrar_vehiculo)
-        linear_progress = findViewById(R.id.linear_registrar_vehiculo_progress)
+        imgV_logo = findViewById(R.id.imgView_logo)
+        progressBar = findViewById(R.id.progressBar_login)
+        linear_progress = findViewById(R.id.linear_login_progress)
         et_email = findViewById(R.id.et_login_email)
         et_contraseña = findViewById(R.id.et_login_password)
         text_recuperar_contrasenia = findViewById(R.id.tV_login_remember_password)
@@ -78,7 +78,7 @@ class InicioSesion : AppCompatActivity() {
                     storageReference.getFile(localFile)
                         .addOnSuccessListener { resultado ->
                             val bitMap = BitmapFactory.decodeFile(localFile.absolutePath)
-                            imgView_logo.setImageBitmap(bitMap)
+                            imgV_logo.setImageBitmap(bitMap)
                             terminar_progressBar = true
                             linear_progress.visibility = View.GONE
                         }
