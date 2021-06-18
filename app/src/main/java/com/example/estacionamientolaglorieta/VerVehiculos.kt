@@ -8,9 +8,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.estacionamientolaglorieta.adaptadores.AdaptadorRegistrosReservaciones
 import com.example.estacionamientolaglorieta.adaptadores.AdaptadorRegistrosVehiculos
-import com.example.estacionamientolaglorieta.adaptadores.Vehiculo
+import com.example.estacionamientolaglorieta.pojos.Vehiculo
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 

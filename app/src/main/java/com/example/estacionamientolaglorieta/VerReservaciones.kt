@@ -9,8 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.estacionamientolaglorieta.adaptadores.AdaptadorRegistrosReservaciones
-import com.example.estacionamientolaglorieta.adaptadores.AdaptadorRegistrosResguardos
-import com.example.estacionamientolaglorieta.adaptadores.Reservacion
+import com.example.estacionamientolaglorieta.pojos.Reservacion
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 

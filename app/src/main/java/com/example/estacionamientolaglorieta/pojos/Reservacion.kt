@@ -1,4 +1,4 @@
-package com.example.estacionamientolaglorieta.adaptadores
+package com.example.estacionamientolaglorieta.pojos
 
 class Reservacion constructor(cajon: String, vehiculo: String, estatus: String){
 

@@ -1,4 +1,4 @@
-package com.example.estacionamientolaglorieta.adaptadores
+package com.example.estacionamientolaglorieta.pojos
 
 class Vehiculo constructor(marca: String, modelo: String, color: String, tamanio: String, placas: String){
 

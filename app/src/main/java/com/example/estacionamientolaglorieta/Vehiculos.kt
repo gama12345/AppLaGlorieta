@@ -1,12 +1,10 @@
 package com.example.estacionamientolaglorieta
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
-import com.example.estacionamientolaglorieta.adaptadores.FragmentPagerRegistros
-import com.example.estacionamientolaglorieta.adaptadores.FragmentPagerVehiculos
+import com.example.estacionamientolaglorieta.fragmentpagers.FragmentPagerVehiculos
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
