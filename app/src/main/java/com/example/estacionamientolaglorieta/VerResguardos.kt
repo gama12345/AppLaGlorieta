@@ -20,7 +20,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 
 class VerResguardos : Fragment() {
-    private lateinit var spinner: Spinner
+    private lateinit var spinner_resguardos: Spinner
     private lateinit var recyclerView: RecyclerView
     private lateinit var refreshLayout: SwipeRefreshLayout
     private lateinit var view_fragement: View
@@ -42,13 +42,13 @@ class VerResguardos : Fragment() {
     }
 
     private fun instanciarComponentes(){
-        spinner = view_fragement.findViewById(R.id.spinner_resguardos)
+        spinner_resguardos = view_fragement.findViewById(R.id.spinner_resguardos)
         ArrayAdapter.createFromResource(requireContext(), R.array.estatus_resguardos, android.R.layout.simple_spinner_item)
                 .also{ adaptador ->
                     adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    spinner.adapter = adaptador
+                    spinner_resguardos.adapter = adaptador
                 }
-        spinner.onItemSelectedListener = filtrarResguardos
+        spinner_resguardos.onItemSelectedListener = filtrarResguardos
         val lim = LinearLayoutManager(context)
         lim.orientation = LinearLayoutManager.VERTICAL
         recyclerView = view_fragement.findViewById(R.id.rv_resguardos)
@@ -62,7 +62,7 @@ class VerResguardos : Fragment() {
 
     var filtrarResguardos: OnItemSelectedListener = object : OnItemSelectedListener {
         override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
-            val opcion_seleccionada: String = spinner.getSelectedItem().toString()
+            val opcion_seleccionada: String = spinner_resguardos.getSelectedItem().toString()
             if(opcion_seleccionada.equals("Todos")){ cargarRegistrosResguardos() }
             else{ cargarRegistrosResguardosFiltro(opcion_seleccionada) }
         }
@@ -103,7 +103,7 @@ class VerResguardos : Fragment() {
                                         }
                                     }
                                     if(registros.size == 0){
-                                        Snackbar.make(spinner, "No se encontraron registros de resguardos", Snackbar.LENGTH_SHORT).show()
+                                        Snackbar.make(spinner_resguardos, "No se encontraron registros de resguardos", Snackbar.LENGTH_SHORT).show()
                                     }
                                     val adaptador = AdaptadorRegistrosResguardos(registros)
                                     recyclerView.adapter = adaptador
@@ -111,16 +111,16 @@ class VerResguardos : Fragment() {
                                 }
                                 .addOnFailureListener{ error ->
                                     detenerEfectoProgressBar()
-                                    Snackbar.make(spinner, error.toString(), Snackbar.LENGTH_SHORT).show()
+                                    Snackbar.make(spinner_resguardos, error.toString(), Snackbar.LENGTH_SHORT).show()
                                 }
                     }else{
                         detenerEfectoProgressBar()
-                        Snackbar.make(spinner, "No se encontraron registros de resguardos", Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(spinner_resguardos, "No se encontraron registros de resguardos", Snackbar.LENGTH_SHORT).show()
                     }
                 }
                 .addOnFailureListener{ error ->
                     detenerEfectoProgressBar()
-                    Snackbar.make(spinner, error.toString(), Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(spinner_resguardos, error.toString(), Snackbar.LENGTH_SHORT).show()
                 }
     }
 
@@ -156,7 +156,7 @@ class VerResguardos : Fragment() {
                                         }
                                     }
                                     if(registros.size == 0){
-                                        Snackbar.make(spinner, "No se encontraron registros de resguardos", Snackbar.LENGTH_SHORT).show()
+                                        Snackbar.make(spinner_resguardos, "No se encontraron registros de resguardos", Snackbar.LENGTH_SHORT).show()
                                     }
                                     val adaptador = AdaptadorRegistrosResguardos(registros)
                                     recyclerView.adapter = adaptador
@@ -164,16 +164,16 @@ class VerResguardos : Fragment() {
                                 }
                                 .addOnFailureListener{ error ->
                                     detenerEfectoProgressBar()
-                                    Snackbar.make(spinner, error.toString(), Snackbar.LENGTH_SHORT).show()
+                                    Snackbar.make(spinner_resguardos, error.toString(), Snackbar.LENGTH_SHORT).show()
                                 }
                     }else{
                         detenerEfectoProgressBar()
-                        Snackbar.make(spinner, "No se encontraron registros de resguardos", Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(spinner_resguardos, "No se encontraron registros de resguardos", Snackbar.LENGTH_SHORT).show()
                     }
                 }
                 .addOnFailureListener{ error ->
                     detenerEfectoProgressBar()
-                    Snackbar.make(spinner, error.toString(), Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(spinner_resguardos, error.toString(), Snackbar.LENGTH_SHORT).show()
                 }
     }
 
